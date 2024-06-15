@@ -1,20 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="plugins/bootstrap.css">
     <link rel="stylesheet" href="styles/app.css">
 </head>
+
 <body>
     <main>
-        <section id="list">List</section>
-        <section id="form">Form</section>
+        <section id="list">
+            <div class="list-task">
+                
+            </div>
+        </section>
+        <section id="form">
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input type="text" class="form-control" id="txtTitle">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea rows="4" class="form-control" id="txtDescription"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Color</label>
+                <input type="color" class="form-control" id="selColor"></input>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Start Date</label>
+                <input type="datetime-local" class="form-control" id="selDate"></input>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Status</label>
+                <select class="form-control" id="selStatus">
+                    <option value="new">New</option>
+                    <option value="in-progress">In progress</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Canceled">Canceled</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Budget</label>
+                <input type="number" class="form-control" id="numBudget"></input>
+            </div>
+            <button type="submit" id="btnSave">Save</button>
+        </section>
     </main>
 
-    <blog>
-
-    </blog>
+    <script src="plugins/jquery3.7.1.js"></script>
+    <script src="plugins/popper.js"></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/task.js"></script>
 </body>
+
 </html>
