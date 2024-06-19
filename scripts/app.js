@@ -16,8 +16,9 @@ function saveTask(){
         data:JSON.stringify(taskToSave),
         contentType: "application/json",
         success: function(response){
-            console.log(response);
+            // console.log(response);
             displayTask(taskToSave);
+            $("input, select, textarea").val(""); //clear all.
         },
         error: function(error){
             console.log(error);
@@ -28,7 +29,7 @@ function saveTask(){
 function loadTask(){
     $.ajax({
         type: "GET",
-        url: "http://fsdiapi.azurewebsites.net/api/tasks/",
+        url: "https://fsdiapi.azurewebsites.net/api/tasks/",
         success: function(response){
             let data = JSON.parse(response);
             // console.log(data);
@@ -45,19 +46,34 @@ function loadTask(){
     });
 }
 
+function deleteTask(id) {
+    console.log(id);
+    $.ajax({
+        type: "DELETE",
+        url: `https://fsdiapi.azurewebsites.net/api/tasks/${id}/`,
+        success: function(response) {
+            console.log("Task deleted:", response);
+            $(`#${id}`).remove();
+        },
+        error: function(error) {
+            console.log("Error deleting task:", error);
+        }
+    });
+}
+
 function displayTask(task){
     let syntax = `
-    <div class="task">
+    <div class="task" id="${task._id}">
         <div class="info">
             <h3>${task.title}</h3>
             <h5>${task.description}</h5>
-            
         </div>
-        <label class="status">${task.status}</label>
+        <label class="status">${task.status} - ${task.color} </label>
         <div class="date-budget">
             <label>${task.date}</label>
-            <label>${task.budget}</label>
+            <label>$ ${task.budget}</label>
         </div>
+        <button class="btn" id="btnDelete" onclick="deleteTask('${task._id}')">Remove</button>
     </div>
     `
     $(".list-task").append(syntax);
@@ -69,7 +85,7 @@ function displayTask(task){
 
 function init(){
     loadTask();
-    console.log("Task manager");
+    // console.log("Task manager");
     $("#btnSave").click(function(){
         saveTask();
     });
